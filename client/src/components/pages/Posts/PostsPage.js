@@ -1,8 +1,9 @@
 import React from 'react';
+import Posts from '../../features/Posts/PostsContainer';
 
 const PostsPage = () => (
   <div>
-    <h1>Posts</h1>
+    <Posts />
   </div>
 );
 
