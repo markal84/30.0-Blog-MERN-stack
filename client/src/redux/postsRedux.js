@@ -1,4 +1,5 @@
-import axios from 'axios'; // much simpler sendin req to server 
+import axios from 'axios'; // much simpler sendin req to server
+import { API_URL } from '../config'; 
 
 
 /* SELECTORS */
@@ -22,14 +23,16 @@ const initialState = [];
 /* THUNKS */
 
 export const loadPostsRequest = () => {
-  return dispatch => {
+  return async dispatch => {
 
-    axios.get('http://localhost:8000/api/posts').then(res => {
+    try {
+
+      let res = await axios.get(`${API_URL}/posts`);
       dispatch(loadPosts(res.data));
-    })
-    .catch(err => {
-      console.log(err.message);
-    });
+
+    } catch(e) {
+      console.log(e.message);
+    }
 
   };
 };
