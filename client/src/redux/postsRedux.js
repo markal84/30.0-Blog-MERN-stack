@@ -5,6 +5,7 @@ import { API_URL } from '../config';
 /* SELECTORS */
 
 export const getPosts = ({ posts }) => posts;
+export const getPostsCounter = ({ posts }) => posts.length; // 1. new selector to count posts
 
 /* ACTIONS */
 // action name creator
