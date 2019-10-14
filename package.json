@@ -7,7 +7,7 @@
   "license": "MIT",
   "scripts": {
     "start": "npm-run-all -p -l start:*",
-    "start:server": "cd server && node server.js",
+    "start:server": "cd server && yarn start",
     "start:client": "cd client && yarn start",
     "install:client": "cd client && npm install",
     "install:server": "cd server && npm install",
@@ -16,6 +16,7 @@
   "dependencies": {
     "animate.css": "3.7.0",
     "axios": "0.18.0",
+    "helmet": "3.18.0",
     "node-sass": "4.12.0",
     "npm-run-all": "4.1.5",
     "react": "16.10.2",
