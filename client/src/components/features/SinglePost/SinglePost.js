@@ -22,6 +22,7 @@ class SinglePost extends React.Component {
             return (
                 <div>
                     <SmallTitle>{post.title}</SmallTitle>
+                    <p>Author: {post.author}</p>
                     <HtmlBox>{post.content}</HtmlBox>
                 </div>
             );
@@ -61,9 +62,10 @@ SinglePost.propTypes = {
             id: PropTypes.string.isRequired,
             title: PropTypes.string.isRequired,
             content: PropTypes.string.isRequired,
+            author: PropTypes.string.isRequired
         })
     ),
-    loadPost: PropTypes.func.isRequired,
+    loadSinglePost: PropTypes.func.isRequired,
 };
 
-export default withRouter(props => <SinglePost {...props}/>); //withRouter function fix single post display
+export default withRouter(props => <SinglePost {...props}/>); //withRouter function used to fix single post display
