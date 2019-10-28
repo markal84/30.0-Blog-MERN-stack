@@ -19,12 +19,14 @@ export const LOAD_SINGLE_POST = createActionName('LOAD_SINGLE_POST'); //SinglePo
 export const START_REQUEST = createActionName('START_REQUEST');
 export const END_REQUEST = createActionName('END_REQUEST');
 export const ERROR_REQUEST = createActionName('ERROR_REQUEST');
+export const RESET_REQUEST = createActionName('RESET_REQUEST'); //add post exercise
 
 export const loadPosts = payload => ({ payload, type: LOAD_POSTS });
 export const loadSinglePost = payload => ({ payload, type: LOAD_SINGLE_POST }) //singlePost exercise
 export const startRequest = () => ({ type: START_REQUEST });
 export const endRequest = () => ({ type: END_REQUEST });
 export const errorRequest = error => ({ error, type: ERROR_REQUEST });
+export const resetRequest = () => ({ type: RESET_REQUEST }); //single post exercise
 
 
 /* INITIAL STATE */
@@ -76,6 +78,23 @@ export const loadSinglePostRequest = (id) => { //singlePost exercise
   };
 };
 
+export const addPostRequest = (post) => { //add post exercise
+  return async dispatch => {
+
+    dispatch(startRequest());
+    try {
+
+      let res = await axios.post(`${API_URL}/posts`, post);
+      await new Promise((resolve, reject) => setTimeout(resolve, 2000));
+      dispatch(endRequest());
+
+    } catch(e) {
+      dispatch(errorRequest(e.message));
+    }
+
+  };
+};
+
 /* REDUCER */
 
 export default function reducer(statePart = initialState, action = {}) {
@@ -89,7 +108,9 @@ export default function reducer(statePart = initialState, action = {}) {
       case END_REQUEST:
         return { ...statePart, request: { pending: false, error: null, success: true } };
       case ERROR_REQUEST:
-        return { ...statePart, request: { pending: false, error: action.error, success: false } };   
+        return { ...statePart, request: { pending: false, error: action.error, success: false } }; 
+      case RESET_REQUEST:
+        return { ...statePart, request: { pending: false, error: null, success: null } };  
       default:
         return statePart;
     }

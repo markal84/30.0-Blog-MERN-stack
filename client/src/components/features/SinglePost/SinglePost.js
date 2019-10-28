@@ -11,8 +11,9 @@ import SmallTitle from '../../common/SmallTitle/SmallTitle';
 class SinglePost extends React.Component {
 
     componentDidMount() {
-        const {loadSinglePost, match} = this.props;
+        const {loadSinglePost, resetRequest, match} = this.props;
         loadSinglePost(match.params.id); // i have to include match() to dipslpay single post properly
+        resetRequest(); // add post exercise
     }
 
     render() {
@@ -66,6 +67,7 @@ SinglePost.propTypes = {
         })
     ),
     loadSinglePost: PropTypes.func.isRequired,
+    resetRequest: PropTypes.func.isRequired,
 };
 
 export default withRouter(props => <SinglePost {...props}/>); //withRouter function used to fix single post display
