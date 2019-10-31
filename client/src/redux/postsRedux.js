@@ -40,10 +40,10 @@ const initialState = {
     pending: false,
     error: null,
     success: null,
-    amount : 0, //pagination exercise
-    postPerPage: 10, //pagination exercise
-    presentPage: 1 //pagination exercise
   },
+  amount : 0, //pagination exercise
+  postPerPage: 10, //pagination exercise
+  presentPage: 1, //pagination exercise
   singlePost: [] //singlePost exercise
 };
 
