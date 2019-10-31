@@ -13,5 +13,8 @@ router.route('/posts/:id').get(PostController.getSinglePost);
 //add new post exercise
 router.route('/posts').post(PostController.addPost);
 
+// get posts by range - pagination exercise
+router.route('/posts/range/:startAt/:limit').get(PostController.getPostsByRange);
+
 
 module.exports = router;
