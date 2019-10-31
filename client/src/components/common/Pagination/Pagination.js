@@ -11,9 +11,9 @@ class Pagination extends React.Component {
 
   
   changePage = (newPage) => {
-    const { onChangePage } = this.props;
+    const { onPageChange } = this.props;
     this.setState({ presentPage: newPage });
-    onChangePage(newPage);
+    onPageChange(newPage);
   }
 
   render() {

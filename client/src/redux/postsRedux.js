@@ -41,10 +41,40 @@ const initialState = {
     error: null,
     success: null,
   },
-  amount : 0, //pagination exercise
+  amount: 0, //pagination exercise
   postsPerPage: 10, //pagination exercise
   presentPage: 1, //pagination exercise
   singlePost: [] //singlePost exercise
+};
+
+
+/* REDUCER */
+
+export default function reducer(statePart = initialState, action = {}) {
+    switch (action.type) {
+      case LOAD_POSTS:
+        return { ...statePart, data: action.payload };
+      case LOAD_SINGLE_POST:
+        return { ...statePart, singlePost: action.payload }; //singlePost exercise
+      case LOAD_POSTS_PAGE: //pagination exercise
+        return {
+          ...statePart,
+          postsPerPage: action.payload.postsPerPage,
+          presentPage: action.payload.presentPage,
+          amount: action.payload.amount,
+          data: [...action.payload.posts],
+          };  
+      case START_REQUEST:
+        return { ...statePart, request: { pending: true, error: null, success: null } };
+      case END_REQUEST:
+        return { ...statePart, request: { pending: false, error: null, success: true } };
+      case ERROR_REQUEST:
+        return { ...statePart, request: { pending: false, error: action.error, success: false } }; 
+      case RESET_REQUEST:
+        return { ...statePart, request: { pending: false, error: null, success: null } };  
+      default:
+        return statePart;
+    }
 };
 
 /* THUNKS */
@@ -84,7 +114,7 @@ export const loadSinglePostRequest = (id) => { //singlePost exercise
   };
 };
 
-export const loadPostsByPageRequest = (page) => { //pagination exercise
+export const loadPostsByPageRequest = (page) => {
   return async dispatch => {
 
     dispatch(startRequest());
@@ -131,32 +161,3 @@ export const addPostRequest = (post) => { //add post exercise
 
   };
 };
-
-/* REDUCER */
-
-export default function reducer(statePart = initialState, action = {}) {
-    switch (action.type) {
-      case LOAD_POSTS:
-        return { ...statePart, data: action.payload };
-      case LOAD_SINGLE_POST:
-        return { ...statePart, singlePost: action.payload }; //singlePost exercise
-      case LOAD_POSTS_PAGE: //pagination exercise
-        return {...statePart,
-          postsPerPage: action.payload.postsPerPage,
-          presentPage: action.payload.presentPage,
-          amount: action.payload.amount,
-          data: [...action.payload.posts],
-          };  
-      case START_REQUEST:
-        return { ...statePart, request: { pending: true, error: null, success: null } };
-      case END_REQUEST:
-        return { ...statePart, request: { pending: false, error: null, success: true } };
-      case ERROR_REQUEST:
-        return { ...statePart, request: { pending: false, error: action.error, success: false } }; 
-      case RESET_REQUEST:
-        return { ...statePart, request: { pending: false, error: null, success: null } };  
-      default:
-        return statePart;
-    }
-};
-

@@ -16,7 +16,6 @@ class Posts extends React.Component {
   loadPostsPage = (page) => {
     const { loadPostsByPage } = this.props;
     loadPostsByPage(page);
-    console.log(page);
   }
 
   render() {
