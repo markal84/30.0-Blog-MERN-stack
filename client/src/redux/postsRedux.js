@@ -42,7 +42,7 @@ const initialState = {
     success: null,
   },
   amount : 0, //pagination exercise
-  postPerPage: 10, //pagination exercise
+  postsPerPage: 10, //pagination exercise
   presentPage: 1, //pagination exercise
   singlePost: [] //singlePost exercise
 };
