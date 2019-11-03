@@ -7,6 +7,7 @@ import Spinner from '../../common/Spinner/Spinner';
 import Alert from '../../common/Alert/Alert';
 import HtmlBox from '../../common/HtmlBox/HtmlBox';
 import SmallTitle from '../../common/SmallTitle/SmallTitle';
+import { FacebookProvider, Comments } from 'react-facebook'; //facebook comments exercise
 
 class SinglePost extends React.Component {
 
@@ -25,6 +26,7 @@ class SinglePost extends React.Component {
                     <SmallTitle>{post.title}</SmallTitle>
                     <p>Author: {post.author}</p>
                     <HtmlBox>{post.content}</HtmlBox>
+
                 </div>
             );
         } else if (request.pending === true || request.success === null) {
