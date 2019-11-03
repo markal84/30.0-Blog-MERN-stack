@@ -9,24 +9,30 @@ import Pagination from '../../common/Pagination/Pagination'; //pagination exerci
 class Posts extends React.Component {
 
   componentDidMount() {
-    const { loadPostsByPage } = this.props;
-    loadPostsByPage(1);
+    const { loadPostsByPage, initialPage, postsPerPage } = this.props;
+    loadPostsByPage(initialPage || 1, postsPerPage || 10);
+    console.log(postsPerPage, initialPage);
   }
 
   loadPostsPage = (page) => {
-    const { loadPostsByPage } = this.props;
-    loadPostsByPage(page);
+    const { loadPostsByPage, postsPerPage } = this.props;
+    loadPostsByPage(page, postsPerPage || 10);
   }
 
   render() {
-    const { posts, request, pages } = this.props;
+    const { posts, request, pages, presentPage } = this.props;
+    let { pagination } = this.props; // it can't be const
     const { loadPostsPage } = this;
+
+    if (pagination === undefined) {
+      pagination = true
+    } 
   
     if (request.pending === false && request.success === true && posts.length > 0) {
       return (
           <div>
               <PostsList posts={posts}/>
-              <Pagination pages={pages} onPageChange={loadPostsPage}/>; 
+              { pagination && <Pagination pages={pages} onPageChange={loadPostsPage} initialPage={presentPage}/> }; 
           </div>
       );
     } else if (request.pending === true || request.success === null) {
@@ -69,5 +75,6 @@ Posts.propTypes = {
   ),
   loadPostsByPage: PropTypes.func.isRequired,
 };
+
 
 export default Posts;

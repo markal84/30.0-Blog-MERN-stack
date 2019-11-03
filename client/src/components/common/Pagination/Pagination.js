@@ -42,7 +42,7 @@ class Pagination extends React.Component {
     return (
 	    <div className="pagination">
 	      <ul className="pagination__list">
-	      	{ presentPage >= 2 ? ( //ES6 version of if
+	      	{ presentPage > 1 ? ( //ES6 version of if
             <li
               className={`pagination__list__item${(true) ? ' pagination__list__item--active' : '' }`}
 	            onClick={prevPage}>

@@ -4,6 +4,8 @@ const config = require('./config');
 const mongoose = require('mongoose');
 const helmet = require('helmet'); //basic security
 const loadTestData = require('./testData');
+const sanitize = require('mongo-sanitize'); // security fix exercise
+
 // import routes
 const postRoutes = require('./routes/post.routes');
 
@@ -14,6 +16,10 @@ app.use(cors());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(helmet());
+app.use((req, res) => { //security fix exercise
+  sanitize(req.body);
+});
+
 //routes
 app.use('/api', postRoutes);
 
