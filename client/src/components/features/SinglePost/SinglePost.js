@@ -7,6 +7,8 @@ import Spinner from '../../common/Spinner/Spinner';
 import Alert from '../../common/Alert/Alert';
 import HtmlBox from '../../common/HtmlBox/HtmlBox';
 import SmallTitle from '../../common/SmallTitle/SmallTitle';
+import { FacebookProvider, Comments, ShareButton } from 'react-facebook'; //facebook comments exercise
+import { BASE_URL } from "../../../config"; //facebook comments exercise
 
 class SinglePost extends React.Component {
 
@@ -17,7 +19,7 @@ class SinglePost extends React.Component {
     }
 
     render() {
-        const { post, request } = this.props;
+        const { post, request, location } = this.props;
 
         if (request.pending === false && request.success === true && post ) {
             return (
@@ -25,6 +27,12 @@ class SinglePost extends React.Component {
                     <SmallTitle>{post.title}</SmallTitle>
                     <p>Author: {post.author}</p>
                     <HtmlBox>{post.content}</HtmlBox>
+                    <FacebookProvider appId="2605117792877968">
+                        <Comments href={`${BASE_URL}/${location.pathname}`} />
+                        <ShareButton href={`${BASE_URL}/${location.pathname}`}>
+                            Share Post
+                        </ShareButton>
+                    </FacebookProvider>
                 </div>
             );
         } else if (request.pending === true || request.success === null) {

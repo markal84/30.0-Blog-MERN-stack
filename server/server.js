@@ -16,8 +16,9 @@ app.use(cors());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(helmet());
-app.use((req, res) => { //security fix exercise
+app.use((req, res, next) => { //security fix exercise
   sanitize(req.body);
+  next();
 });
 
 //routes
