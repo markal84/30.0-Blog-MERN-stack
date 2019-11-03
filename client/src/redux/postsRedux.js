@@ -87,7 +87,7 @@ export const loadPostsRequest = () => {
     try {
 
       let res = await axios.get(`${API_URL}/posts`);
-      await new Promise((resolve, reject) => setTimeout(resolve, 500));
+      
       dispatch(loadPosts(res.data));
       dispatch(endRequest());
 
@@ -104,7 +104,7 @@ export const loadSinglePostRequest = (id) => { //singlePost exercise
     dispatch(startRequest());
     try {
       let res = await axios.get(`${API_URL}/posts/${id}`);
-      await new Promise((resolve, reject) => setTimeout(resolve, 500)); //just to simulate post loading on remote server
+      
       dispatch(loadSinglePost(res.data));
       dispatch(endRequest());
 
@@ -127,7 +127,7 @@ export const loadPostsByPageRequest = (page, postsPerPage) => {
       const limit = postsPerPage;
 
       let res = await axios.get(`${API_URL}/posts/range/${startAt}/${limit}`);
-      await new Promise((resolve, reject) => setTimeout(resolve, 500));
+      
 
       const payload = {
         posts: res.data.posts,
@@ -153,7 +153,7 @@ export const addPostRequest = (post) => { //add post exercise
     try {
 
       let res = await axios.post(`${API_URL}/posts`, post);
-      await new Promise((resolve, reject) => setTimeout(resolve, 2000));
+      
       dispatch(endRequest());
 
     } catch(e) {

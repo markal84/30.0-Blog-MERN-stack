@@ -1,4 +1,4 @@
 module.exports = {
     PORT: 8000,
-    DB: 'mongodb://localhost:27017/mernapp',
+    DB: 'mongodb+srv://Kodilla_Blog:WYgAXJ06xtw4PKXQ@kodilla-enwks.mongodb.net/test?retryWrites=true&w=majority',
 };
