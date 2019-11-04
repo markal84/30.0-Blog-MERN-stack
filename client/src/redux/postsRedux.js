@@ -1,5 +1,5 @@
 import axios from 'axios'; // much simpler sendin req to server
-import { API_URL } from '../config'; 
+import { API_URL, BASE_URL } from '../config'; 
 
 
 /* SELECTORS */
@@ -86,7 +86,7 @@ export const loadPostsRequest = () => {
     dispatch(startRequest());
     try {
 
-      let res = await axios.get(`${API_URL}/posts`);
+      let res = await axios.get(`${BASE_URL}${API_URL}/posts`);
       
       dispatch(loadPosts(res.data));
       dispatch(endRequest());
@@ -103,7 +103,7 @@ export const loadSinglePostRequest = (id) => { //singlePost exercise
 
     dispatch(startRequest());
     try {
-      let res = await axios.get(`${API_URL}/posts/${id}`);
+      let res = await axios.get(`${BASE_URL}${API_URL}/posts/${id}`);
       
       dispatch(loadSinglePost(res.data));
       dispatch(endRequest());
@@ -126,7 +126,7 @@ export const loadPostsByPageRequest = (page, postsPerPage) => {
       const startAt = (page - 1) * postsPerPage;
       const limit = postsPerPage;
 
-      let res = await axios.get(`${API_URL}/posts/range/${startAt}/${limit}`);
+      let res = await axios.get(`${BASE_URL}${API_URL}/posts/range/${startAt}/${limit}`);
       
 
       const payload = {
@@ -152,7 +152,7 @@ export const addPostRequest = (post) => { //add post exercise
     dispatch(startRequest());
     try {
 
-      let res = await axios.post(`${API_URL}/posts`, post);
+      let res = await axios.post(`${BASE_URL}${API_URL}/posts`, post);
       
       dispatch(endRequest());
 
