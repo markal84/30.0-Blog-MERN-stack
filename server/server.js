@@ -28,7 +28,7 @@ app.use(express.static(path.join(__dirname, '/../client/build')));
 app.use('/api', postRoutes);
 
 // connects our back end code with the database
-mongoose.connect(config.DB, { useNewUrlParser: true });
+mongoose.connect(process.env.DB, { useNewUrlParser: true });
 let db = mongoose.connection;
 
 app.get('*', (req, res) => { //heroku integration
